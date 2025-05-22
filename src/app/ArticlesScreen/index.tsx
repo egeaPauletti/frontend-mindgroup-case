@@ -1,6 +1,6 @@
 import Header from "@/src/components/Header";
 import ProfilePhoto from "@/src/components/ProfilePhoto";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert, Image, Pressable, ScrollView, Text, View } from "react-native";
 import { useAuth } from "../../contexts/auth";
@@ -26,7 +26,7 @@ interface Article {
 export default function ArticlesScreen() {
   const [articles, setArticles] = useState<Article[]>([]);
   const { user } = useAuth();
-
+  const router = useRouter();
   useEffect(() => {
     const getArticles = async () => {
       try {
@@ -56,7 +56,13 @@ export default function ArticlesScreen() {
         paddingHorizontal: 10,
       }}
     >
-      <Header />
+      <Header
+        onHomePress={() => router.push("./HomeScreen/")}
+        onArtigosPress={() => router.push("./ArticlesScreen/")}
+        onOptionSelect={(optionId) =>
+          console.log("Selecionou opção:", optionId)
+        }
+      />
 
       <View style={{ width: "100%" }}>
         {articles.map((article) => (

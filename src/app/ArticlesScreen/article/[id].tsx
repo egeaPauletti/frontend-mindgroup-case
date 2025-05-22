@@ -1,5 +1,6 @@
+import Header from "@/src/components/Header";
 import ProfilePhoto from "@/src/components/ProfilePhoto";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -32,7 +33,7 @@ export default function ArticleDetailScreen() {
   const { id } = useLocalSearchParams();
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter();
   const fetchArticle = async () => {
     try {
       const res = await fetch(`http://192.168.15.90:3000/articles/${id}`);
@@ -64,28 +65,38 @@ export default function ArticleDetailScreen() {
         backgroundColor: "#fff",
       }}
     >
-      <Image
-        source={{ uri: `http://192.168.15.90:3000${article.image}` }}
-        style={{ width: "100%", height: 300, borderRadius: 10 }}
+      <Header
+        onHomePress={() => router.push("../../HomeScreen/")}
+        onArtigosPress={() => router.push("../../ArticlesScreen/")}
+        onOptionSelect={(optionId) =>
+          console.log("Selecionou opção:", optionId)
+        }
       />
-      <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 20 }}>
-        {article.title}
-      </Text>
-      <View
-        style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}
-      >
-        <ProfilePhoto
-          img={`http://192.168.15.90:3000${article.author.imageProfile}`}
-          size={30}
+      <View>
+        <Image
+          source={{ uri: `http://192.168.15.90:3000${article.image}` }}
+          style={{ width: "100%", height: 300, borderRadius: 10 }}
         />
-        <Text style={{ marginLeft: 8 }}>
-          Por <Text style={{ fontWeight: "bold" }}>{article.author.name}</Text>{" "}
-          - {new Date(article.createdAt).toLocaleDateString()}
+        <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 20 }}>
+          {article.title}
+        </Text>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}
+        >
+          <ProfilePhoto
+            img={`http://192.168.15.90:3000${article.author.imageProfile}`}
+            size={30}
+          />
+          <Text style={{ marginLeft: 8 }}>
+            Por{" "}
+            <Text style={{ fontWeight: "bold" }}>{article.author.name}</Text> -{" "}
+            {new Date(article.createdAt).toLocaleDateString()}
+          </Text>
+        </View>
+        <Text style={{ marginTop: 20, fontSize: 16, lineHeight: 24 }}>
+          {article.content}
         </Text>
       </View>
-      <Text style={{ marginTop: 20, fontSize: 16, lineHeight: 24 }}>
-        {article.content}
-      </Text>
     </ScrollView>
   );
 }

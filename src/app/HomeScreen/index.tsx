@@ -1,5 +1,6 @@
 import Header from "@/src/components/Header";
 import ProfilePhoto from "@/src/components/ProfilePhoto";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   Alert,
@@ -33,6 +34,7 @@ interface Article {
 export default function HomeScreen() {
   const { user } = useAuth();
   const [articles, setArticles] = useState<Article[]>([]);
+  const router = useRouter();
 
   const getArticles = async () => {
     try {
@@ -78,7 +80,14 @@ export default function HomeScreen() {
         paddingHorizontal: 10,
       }}
     >
-      <Header />
+      <Header
+        onHomePress={() => router.push("./HomeScreen/")}
+        onArtigosPress={() => router.push("./ArticlesScreen/")}
+        onOptionSelect={(optionId) =>
+          console.log("Selecionou opção:", optionId)
+        }
+      />
+
       <View className="w-full justify-between items-center gap-10 p-5 pb-20">
         <View className="w-full flex-col gap-2">
           <Image
