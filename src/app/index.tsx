@@ -1,7 +1,13 @@
 import { StatusBar, StyleSheet, View } from "react-native";
+import "../styles/global.css";
+import LoginScreen from "./LoginScreen/index";
 
 export default function App() {
-  return <View style={styles.container}></View>;
+  return (
+    <View style={styles.container}>
+      <LoginScreen />
+    </View>
+  );
 }
 const styles = StyleSheet.create({
   container: {
@@ -13,4 +19,3 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
 });
-//
