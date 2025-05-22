@@ -1,9 +1,8 @@
 import ToatsNotigation from "@/src/components/Toats";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Alert, Pressable, Text, TextInput, View } from "react-native";
-import Toast from "react-native-toast-message";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>("");
@@ -23,23 +22,12 @@ export default function LoginScreen() {
 
       if (!res.ok) {
         setToast(!toast);
+
         setTimeout(() => {
           setToast(toast);
         }, 2000);
         return;
       }
-
-      Toast.show({
-        type: "success",
-        text1: "Sucesso ao Logar!",
-      });
-
-      setTimeout(() => {
-        Toast.show({
-          type: "success",
-          text1: "Bem vindo!",
-        });
-      }, 1500);
 
       setTimeout(async () => {
         await AsyncStorage.setItem("token", data.token);
@@ -52,8 +40,8 @@ export default function LoginScreen() {
   };
 
   return (
-    <View className="flex flex-col items-center gap-20 pt-20">
-      {toast && <ToatsNotigation />}
+    <View className="flex flex-col items-center gap-14 pt-20 px-10">
+      {toast && <ToatsNotigation text="Email ou senha incorretos." />}
       <View className="flex flex-col gap-2">
         <Text className="text-3xl font-bold">Bem-Vindo de Volta!</Text>
         <Text className="text-base">

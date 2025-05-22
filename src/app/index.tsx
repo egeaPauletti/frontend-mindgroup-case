@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import "../styles/global.css";
 import LoginScreen from "./LoginScreen/index";
 
@@ -14,8 +14,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
-    padding: 20,
     backgroundColor: "#fff",
-    paddingTop: StatusBar.currentHeight,
   },
 });
