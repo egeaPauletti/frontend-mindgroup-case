@@ -95,7 +95,7 @@ export default function HomeScreen() {
             <Text>Por</Text>
             <Text className="font-bold">{user?.name}</Text>
             <Text>-</Text>
-            <Text>{lastArticleDate}</Text>
+            <Text>{new Date(lastArticleDate).toLocaleDateString()}</Text>
           </View>
         </View>
         <View className="w-full flex-col gap-7 bg-[#1B1B1B] p-5 rounded-lg">
