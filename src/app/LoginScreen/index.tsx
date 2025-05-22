@@ -1,14 +1,16 @@
-import ToatsNotigation from "@/src/components/Toats";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Alert, Pressable, Text, TextInput, View } from "react-native";
+import ToatsNotigation from "../../components/Toats";
+import { useAuth } from "../../contexts/auth";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [toast, setToast] = useState(false);
   const router = useRouter();
+
+  const { handleLogin } = useAuth();
 
   const handleSubmit = async () => {
     try {
@@ -21,17 +23,20 @@ export default function LoginScreen() {
       const data = await res.json();
 
       if (!res.ok) {
-        setToast(!toast);
+        setToast(true);
 
         setTimeout(() => {
-          setToast(toast);
+          setToast(false);
         }, 2000);
         return;
       }
 
+      // console.log("Usuário após login:", data.user);
+      handleLogin(data.user);
+
       setTimeout(async () => {
-        await AsyncStorage.setItem("token", data.token);
-        router.push("./homeScreen/");
+        // await AsyncStorage.setItem("token", data.token);
+        router.push("./HomeScreen/");
       }, 2000);
     } catch (error) {
       console.error(error);
