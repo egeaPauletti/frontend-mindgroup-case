@@ -1,6 +1,6 @@
-# 📱 Blog App - Frontend
+# 📱 MindApp - Frontend
 
-Este é o frontend do Blog App, desenvolvido com **React Native** utilizando **Expo** para facilitar o desenvolvimento e o build da aplicação. A interface foi estilizada com **Tailwind CSS** adaptado para React Native através do **Nativewind**. O projeto é construído utilizando **TypeScript** para maior segurança e produtividade.
+Este é o frontend do Blog App um projeto desenvolvido para a empresa MindGroup, desenvolvido com **React Native** utilizando **Expo** para facilitar o desenvolvimento e o build da aplicação. A interface foi estilizada com **Tailwind CSS** adaptado para React Native através do **Nativewind**. O projeto é construído utilizando **TypeScript** para maior segurança e produtividade.
 
 ⚠️ **Disclaimer:** Este projeto ainda **não está completo**. Atualmente, as seguintes telas e funcionalidades já foram implementadas e estão funcionando:
 
